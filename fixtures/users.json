@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "$ref": "_models/user.json"
+            },
+            "uniqueItems": true
+        },
+        "links": {
+            "description": "Link members related to the primary data.",
+            "allOf": [
+                {
+                    "$ref": "_definitions/links.json"
+                },
+                {
+                    "$ref": "_definitions/pagination.json"
+                }
+            ]
+        },
+        "meta": {
+            "$ref": "_definitions/meta.json"
+        }
+    },
+    "required": [
+        "data"
+    ],
+    "additionalProperties": false
+}
+

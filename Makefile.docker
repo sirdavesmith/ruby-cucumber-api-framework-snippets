@@ -1,0 +1,21 @@
+ID = default
+DOCKER_IMAGE_NAME = automation-base-$(ID)
+DOCKER_CONTAINER  = automation-$(ID)
+DOCKER_WORKDIR    = /work
+CACHE_PATH        = '/tmp/docker/cache'
+
+base:
+	docker build -t $(DOCKER_IMAGE_NAME) .
+
+exec: base
+	docker run --name $(DOCKER_CONTAINER) --env-file ./env.list -d $(DOCKER_IMAGE_NAME) /sbin/init
+	docker exec -it $(DOCKER_CONTAINER) /bin/sh
+
+runner: base
+	docker run  --name $(DOCKER_CONTAINER) --env-file ./env.list $(DOCKER_IMAGE_NAME) $(DOCKER_WORKDIR)/runner.sh jenkins -t @smoke
+	docker cp $(DOCKER_CONTAINER):$(DOCKER_WORKDIR)/result/automation-result.json .
+	docker rm $(DOCKER_CONTAINER)
+
+clean:
+	docker rm --force $(DOCKER_CONTAINER) || true
+	docker rmi $(DOCKER_IMAGE_NAME) || true

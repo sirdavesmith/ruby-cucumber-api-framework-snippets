@@ -1,0 +1,212 @@
+[
+  {
+    "path": "/companies/:company_id/properties",
+    "name": "properties.index",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/companies/:company_id/properties",
+    "name": "properties.create",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "path": "/companies",
+    "name": "companies.index",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/companies",
+    "name": "companies.create",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "path": "/companies/:id",
+    "name": "companies.show",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/companies/:id",
+    "name": "companies.update",
+    "methods": [
+      "PATCH"
+    ]
+  },
+  {
+    "path": "/companies/:id",
+    "name": "companies.update",
+    "methods": [
+      "PUT"
+    ]
+  },
+  {
+    "path": "/companies/:id",
+    "name": "companies.delete",
+    "methods": [
+      "DELETE"
+    ]
+  },
+  {
+    "path": "/environments/:environment_id/relationships/adapter",
+    "name": "environments_relationships_adapter.show",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/environments/:environment_id/relationships/adapter",
+    "name": "environments_relationships_adapter.update",
+    "methods": [
+      "PATCH"
+    ]
+  },
+  {
+    "path": "/environments/:environment_id/relationships/adapter",
+    "name": "environments_relationships_adapter.update",
+    "methods": [
+      "PUT"
+    ]
+  },
+  {
+    "path": "/environments/:environment_id/adapter",
+    "name": "environment_adapter.index",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/environments/:id",
+    "name": "environments.show",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/environments/:id",
+    "name": "environments.update",
+    "methods": [
+      "PATCH"
+    ]
+  },
+  {
+    "path": "/environments/:id",
+    "name": "environments.update",
+    "methods": [
+      "PUT"
+    ]
+  },
+  {
+    "path": "/environments/:id",
+    "name": "environments.delete",
+    "methods": [
+      "DELETE"
+    ]
+  },
+  {
+    "path": "/properties/:property_id/environments",
+    "name": "environments.index",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/properties/:property_id/environments",
+    "name": "environments.create",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "path": "/properties",
+    "name": "properties.create",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "path": "/properties/:id",
+    "name": "properties.show",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/properties/:id",
+    "name": "properties.update",
+    "methods": [
+      "PATCH"
+    ]
+  },
+  {
+    "path": "/properties/:id",
+    "name": "properties.update",
+    "methods": [
+      "PUT"
+    ]
+  },
+  {
+    "path": "/properties/:id",
+    "name": "properties.delete",
+    "methods": [
+      "DELETE"
+    ]
+  },
+  {
+    "path": "/users",
+    "name": "users.index",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/users",
+    "name": "users.create",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "path": "/users/:id",
+    "name": "users.show",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "path": "/users/:id",
+    "name": "users.update",
+    "methods": [
+      "PATCH"
+    ]
+  },
+  {
+    "path": "/users/:id",
+    "name": "users.update",
+    "methods": [
+      "PUT"
+    ]
+  },
+  {
+    "path": "/users/:id",
+    "name": "users.delete",
+    "methods": [
+      "DELETE"
+    ]
+  },
+  {
+    "path": "/heartbeat",
+    "name": "",
+    "methods": [
+      "GET"
+    ]
+  }
+]

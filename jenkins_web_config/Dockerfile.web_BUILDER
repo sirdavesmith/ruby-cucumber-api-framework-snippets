@@ -1,0 +1,40 @@
+FROM ruby:2.6.2-slim-stretch
+
+VOLUME /usr/local/bundle
+
+ENV BUNDLE_PATH /bundle
+ENV WORKDIR /srv/automation
+ENV BUNDLE_JOBS=8
+ENV RUBYOPT="-W0"
+
+RUN mkdir $WORKDIR
+WORKDIR $WORKDIR
+
+RUN apt-get update && apt-get install -y \
+  apt-utils \
+  build-essential \
+  vim \
+  xvfb \
+  libgtk2.0-0 \
+  libnotify-dev \
+  libgconf-2-4 \
+  libnss3 \
+  libxss1 \
+  libasound2 \
+  uuid-runtime \
+  curl \
+  git \
+  nginx
+
+## Get the code out there.
+COPY . .
+COPY gemrc /root/.gemrc
+COPY ./core-extension-validation/nginx/server.conf /etc/nginx/sites-available/default
+
+RUN pwd \
+  && rm $WORKDIR/env-*.sh \
+  && rm -r $WORKDIR/results \
+  && mkdir $WORKDIR/results \
+  && gem install bundler
+
+CMD ["bash"]

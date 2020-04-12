@@ -1,0 +1,11 @@
+{
+  "features/*.feature": {
+    "type": "feature",
+    "alternate": "fixtures/_models/{singular}.json"
+  },
+  "fixtures/*.json": {
+    "type": "fixture",
+    "alternate": "features/{basename|singular|plural}.feature"
+  },
+  "features/step_definitions/*.rb": {"type": "step"}
+}

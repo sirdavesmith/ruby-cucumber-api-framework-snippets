@@ -1,0 +1,12 @@
+FROM artifactory-server.acme.com/automation:n12.4
+
+ENV WORKDIR /srv/automation
+WORKDIR $WORKDIR
+
+## Get the latest code out there.
+COPY . .
+
+RUN bundle install && \
+  npm install
+
+CMD bash

@@ -1,0 +1,10 @@
+{
+    "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
+    "type": "object",
+    "patternProperties": {
+        "^\\w[-\\w_]*$": {
+            "$ref": "unnamed_relationship.json"
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,119 @@
+#!groovy​
+pipeline {
+	agent {
+		dockerfile {
+        filename './jenkins_web_config/Dockerfile.web'
+				args '-u root:root'
+        registryUrl 'https://artifactory.acme.com'
+        registryCredentialsId 'automation_artifactory'
+    }
+	}
+
+	environment{
+		CLIENT_ID           ="Company-KEY"
+		CLIENT_SCOPES       ="<scopes>"
+		DEFAULT_COMPANY     ="API Automation Integration"
+		SFTP_KEY            = credentials('AUTOMATION-SFTP_KEY')
+		USERNAME            ="automation@acme.com"
+		USERPASS            = credentials('AUTOMATION-QE-API-USERPASS')
+		CLIENT_SECRET       = credentials('AUTOMATION-CLIENT_SECRET')
+		LOGIN_SERVICE_HOST  = "https://srv-prod.acme.com"
+		AUTOMATION_RUNNER	    = "jenkins_web_config/jenkins-web-runner.sh -t @smoke || true"
+		AUTOMATION_CLEAN	    = "jenkins_web_config/jenkins-web-runner.sh -t @jenkins --feature cleanup || true"
+	}
+
+  stages{
+		stage('Execute Tests in QE'){
+			when {
+				environment name: 'TARGET_ENV', value: 'QE'
+			}
+			environment{
+				SFTP_KEY            = credentials('AUTOMATION-QE-SFTP_KEY')
+				CLIENT_SECRET       = credentials('AUTOMATION-QE-CLIENT_SECRET')
+				LOGIN_SERVICE_HOST  = "https://srv-qe.acme.com"
+				ROOT_URL            = "https://qe.acme.io"
+				DEFAULT_COMPANY_ID  = "<id>"
+			}
+			steps{
+				sh 'id'
+				sh 'printenv'
+				sh '$WORKDIR/$AUTOMATION_RUNNER'
+				sh '$WORKDIR/$AUTOMATION_CLEAN'
+			}
+		}
+		stage('Execute Tests in STAGE'){
+			when {
+				environment name: 'TARGET_ENV', value: 'STAGE'
+			}
+			environment{
+				ROOT_URL        = "https://stage.acme.io"
+				DEFAULT_COMPANY_ID = "<id>"
+			}
+			steps{
+				sh 'id'
+				sh 'printenv'
+				sh '$WORKDIR/$AUTOMATION_RUNNER'
+				sh '$WORKDIR/$AUTOMATION_CLEAN'
+			}
+		}
+		stage('Execute Tests in INT'){
+			when {
+				environment name: 'TARGET_ENV', value: 'INT'
+			}
+			environment{
+				ROOT_URL        = "https://int.acme.io"
+				DEFAULT_COMPANY_ID = "<id>"
+			}
+			steps{
+				sh 'id'
+				sh 'printenv'
+				sh '$WORKDIR/$AUTOMATION_RUNNER'
+				sh '$WORKDIR/$AUTOMATION_CLEAN'
+			}
+		}
+		stage('Execute Tests in DEMO'){
+			when {
+				environment name: 'TARGET_ENV', value: 'DEMO'
+			}
+			environment{
+				ROOT_URL        = "https://demo.acme.io"
+				DEFAULT_COMPANY_ID = "<id>"
+			}
+			steps{
+				sh 'id'
+				sh 'printenv'
+				sh '$WORKDIR/$AUTOMATION_RUNNER'
+				sh '$WORKDIR/$AUTOMATION_CLEAN'
+			}
+		}
+		stage('Execute Tests in PROD'){
+			when {
+				environment name: 'TARGET_ENV', value: 'PROD'
+			}
+			environment{
+				ROOT_URL        = "https://prod.acme.io"
+				DEFAULT_COMPANY_ID = "<id>"
+			}
+			steps{
+				sh 'id'
+				sh 'printenv'
+				sh '$WORKDIR/$AUTOMATION_RUNNER'
+				sh '$WORKDIR/$AUTOMATION_CLEAN'
+			}
+		}
+
+		stage('Generate Reports'){
+			steps{
+    		sh 'cp $WORKDIR/results/*.xml "$WORKSPACE"'
+				junit '*.xml'
+			}
+		}
+  }
+	post {
+		failure {
+      mail to: 'devteam@acme.com',
+          subject: "FAILED: ${currentBuild.fullDisplayName}",
+          body: "Something FAILED with the API smoke tests in ${TARGET_ENV}\n\n${env.BUILD_URL}"
+    }
+  }
+}

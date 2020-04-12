@@ -1,0 +1,241 @@
+{
+  "adapter.create": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        },
+        "type_of": {
+          "type": "string",
+          "enum": [
+            "cdn"
+          ],
+          "required": "true"
+        }
+      }
+    ],
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        },
+        "type_of": {
+          "type": "string",
+          "enum": [
+            "sftp"
+          ],
+          "required": "true"
+        },
+        "user": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        },
+        "encrypted_private_key": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        },
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "required": "true"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        }
+      }
+    ]
+  ],
+  "adapter.update": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        },
+        "user": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        },
+        "encrypted_private_key": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        },
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "required": "false"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        }
+      }
+    ]
+  ],
+  "company.create": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        },
+        "org_id": {
+          "type": "string",
+          "pattern": "[a-zA-Z0-9]{24}@Acme",
+          "required": "true"
+        }
+      }
+    ]
+  ],
+  "company.update": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        }
+      }
+    ]
+  ],
+  "environment.create": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        },
+        "path": {
+          "type": "string",
+          "required": "false"
+        },
+        "relative_path": {
+          "type": "boolean",
+          "required": "false"
+        },
+        "archive": {
+          "type": "boolean",
+          "required": "false"
+        },
+        "archive_passphrase": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "development",
+            "staging",
+            "production"
+          ],
+          "required": "false"
+        }
+      }
+    ]
+  ],
+  "environment.update": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        },
+        "path": {
+          "type": "string",
+          "required": "false"
+        },
+        "relative_path": {
+          "type": "boolean",
+          "required": "false"
+        },
+        "archive": {
+          "type": "boolean",
+          "required": "false"
+        },
+        "archive_passphrase": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        }
+      }
+    ]
+  ],
+  "property.create": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "true"
+        }
+      }
+    ]
+  ],
+  "property.update": [
+    [
+      {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "required": "false"
+        }
+      }
+    ]
+  ],
+  "user.create": [
+    [
+      {
+        "company_id": {
+          "type": "string",
+          "pattern": "[a-zA-Z0-9]{24}@.*",
+          "required": "true"
+        },
+        "system_admin": {
+          "type": "boolean",
+          "required": "false"
+        }
+      }
+    ]
+  ],
+  "user.update": [
+    [
+      {
+        "company_id": {
+          "type": "string",
+          "pattern": "[a-zA-Z0-9]{24}@.*",
+          "required": "false"
+        },
+        "system_admin": {
+          "type": "boolean",
+          "required": "false"
+        }
+      }
+    ]
+  ]
+}

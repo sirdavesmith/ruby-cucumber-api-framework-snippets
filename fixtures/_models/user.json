@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "active_org": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "[a-zA-Z0-9]{24}@Acme"
+        },
+        "company_id": {
+          "type": "string",
+          "pattern": "[a-zA-Z0-9]{24}@.*"
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "display_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "login_service_organizations": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "login_service_profile": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "rights": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "company_id",
+        "created_at",
+        "updated_at"
+      ],
+      "additionalProperties": false
+    },
+    "id": {
+      "type": "string",
+      "pattern": "UR[a-zA-Z0-9]{32}"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "pattern": "/users/UR[a-zA-Z0-9]{32}"
+        }
+      },
+      "required": [
+        "self"
+      ],
+      "additionalProperties": false
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "users"
+      ]
+    }
+  },
+  "required": [
+    "attributes",
+    "id",
+    "links",
+    "type"
+  ],
+  "additionalProperties": false
+}
+
